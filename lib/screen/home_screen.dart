@@ -10,8 +10,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController _heightController = TextEditingController();
-  TextEditingController _weightController = TextEditingController();
+  final TextEditingController _heightController = TextEditingController();
+  final TextEditingController _weightController = TextEditingController();
   double _bmiResult = 0;
   String _textResult = "";
   @override
@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 0,
           centerTitle: true,
         ),
-        backgroundColor: Color.fromARGB(255, 29, 29, 26),
+        backgroundColor: const Color.fromARGB(255, 29, 29, 26),
         body: SingleChildScrollView(
           child: Column(children: [
             const SizedBox(
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
+                SizedBox(
                   width: 130,
                   child: TextField(
                     controller: _heightController,
@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         )),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 130,
                   child: TextField(
                     controller: _weightController,
@@ -80,6 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             GestureDetector(
                 onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Calculated')));
+
                   double h = double.parse(_heightController.text);
                   double w = double.parse(_weightController.text);
                   setState(() {
